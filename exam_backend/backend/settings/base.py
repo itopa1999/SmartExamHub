@@ -46,7 +46,6 @@ SYSTEM_DEFINE_APPS = [
 
 APPLICATION_APPS = [
     'apps.core',
-    'apps.primary',
 ]
 
 
