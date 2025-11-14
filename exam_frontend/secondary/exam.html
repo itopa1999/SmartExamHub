@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam in Progress - SmartExam Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/exam_frontend/css/style.css">
+    <link rel="stylesheet" href="/exam_frontend/secondary/css/exam.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+
+    <!-- Particle Effect -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="loader"></div>
+            <div class="loader-content">
+                <h3>SmartExams Portal</h3>
+                <p>Loading examination...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exam Header -->
+    <header class="exam-header">
+        <div class="exam-header-container">
+            <div class="exam-brand">
+                <div class="exam-logo">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="exam-title">
+                    <h1 id="currentExamTitle">Mathematics Examination</h1>
+                    <p class="exam-subtitle" id="currentExamSubtitle">Secondary Education</p>
+                </div>
+            </div>
+            
+            <div class="exam-controls">
+                <div class="timer-container">
+                    <div class="timer" id="examTimer">
+                        <i class="fas fa-clock"></i>
+                        <span id="timerDisplay">02:00:00</span>
+                    </div>
+                    <div class="timer-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="timerProgress"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn-exit" id="exitExamBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Exit Exam
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Exam Content -->
+    <main class="exam-main">
+        <div class="exam-container">
+            <!-- Left Sidebar - Question Navigation -->
+            <aside class="exam-sidebar">
+                <div class="sidebar-section">
+                    <h3>Question Navigation</h3>
+                    <div class="question-grid" id="questionNavGrid">
+                        <!-- Questions will be populated dynamically -->
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3>Exam Progress</h3>
+                    <div class="progress-stats">
+                        <div class="progress-item">
+                            <span class="progress-label">Answered</span>
+                            <span class="progress-value" id="answeredCount">0</span>
+                        </div>
+                        <div class="progress-item">
+                            <span class="progress-label">Flagged</span>
+                            <span class="progress-value" id="flaggedCount">0</span>
+                        </div>
+                        <div class="progress-item">
+                            <span class="progress-label">Remaining</span>
+                            <span class="progress-value" id="remainingCount">50</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3>Legend</h3>
+                    <div class="legend-items">
+                        <div class="legend-item">
+                            <div class="legend-color answered"></div>
+                            <span>Answered</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color current"></div>
+                            <span>Current</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color flagged"></div>
+                            <span>Flagged</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color unattempted"></div>
+                            <span>Unattempted</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Exam Area -->
+            <section class="exam-content">
+                <!-- Question Header -->
+                <div class="question-header">
+                    <div class="question-meta">
+                        <span class="question-number" id="currentQuestionNumber">Question 1</span>
+                        <span class="question-points" id="questionPoints">(2 points)</span>
+                    </div>
+                    <div class="question-actions">
+                        <button class="btn-flag" id="flagQuestionBtn">
+                            <i class="far fa-flag"></i>
+                            <span>Flag for Review</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question Content -->
+                <div class="question-content">
+                    <div class="question-text" id="questionText">
+                        <!-- Question text will be loaded here -->
+                    </div>
+                    
+                    <!-- Multiple Choice Options -->
+                    <div class="answer-options" id="answerOptions">
+                        <!-- Answer options will be loaded here -->
+                    </div>
+
+                    <!-- Text Answer Area (for essay questions) -->
+                    <div class="essay-answer" id="essayAnswer" style="display: none;">
+                        <textarea 
+                            id="essayText" 
+                            placeholder="Type your answer here..." 
+                            rows="8"
+                        ></textarea>
+                        <div class="word-count">
+                            <span id="wordCount">0</span> words
+                        </div>
+                    </div>
+
+                    <!-- Math Answer Area (for mathematical expressions) -->
+                    <div class="math-answer" id="mathAnswer" style="display: none;">
+                        <div class="math-editor">
+                            <textarea 
+                                id="mathExpression" 
+                                placeholder="Enter your mathematical expression or working..."
+                                rows="6"
+                            ></textarea>
+                        </div>
+                        <div class="math-preview">
+                            <h4>Preview:</h4>
+                            <div id="mathPreview">Your expression will appear here</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="question-navigation">
+                    <button class="btn-nav btn-prev" id="prevQuestionBtn" disabled>
+                        <i class="fas fa-arrow-left"></i>
+                        Previous Question
+                    </button>
+                    
+                    <div class="nav-info">
+                        <span id="navInfo">Question 1 of 50</span>
+                    </div>
+                    
+                    <button class="btn-nav btn-next" id="nextQuestionBtn">
+                        Next Question
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Exam Footer -->
+    <footer class="exam-footer">
+        <div class="exam-footer-container">
+            <div class="footer-info">
+                <span id="studentInfo">Student: John Doe (S12345)</span>
+                <span class="footer-separator">|</span>
+                <span id="examInfo">Mathematics Exam - Secondary Education</span>
+            </div>
+            
+            <div class="footer-actions">
+                <button class="btn-secondary" id="reviewBtn">
+                    <i class="fas fa-list"></i>
+                    Review Answers
+                </button>
+                <button class="btn-primary" id="submitExamBtn">
+                    <i class="fas fa-paper-plane"></i>
+                    Submit Exam
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Review Modal -->
+    <div class="modal-overlay" id="reviewModal">
+        <div class="modal modal-large">
+            <div class="modal-header">
+                <h2>Review Your Answers</h2>
+                <button class="modal-close" id="reviewModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="review-summary">
+                    <div class="summary-item">
+                        <span class="summary-label">Total Questions:</span>
+                        <span class="summary-value" id="reviewTotal">50</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Answered:</span>
+                        <span class="summary-value" id="reviewAnswered">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Flagged:</span>
+                        <span class="summary-value" id="reviewFlagged">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Time Remaining:</span>
+                        <span class="summary-value" id="reviewTime">02:00:00</span>
+                    </div>
+                </div>
+                
+                <div class="review-questions">
+                    <h3>Question Status</h3>
+                    <div class="review-grid" id="reviewGrid">
+                        <!-- Review items will be populated here -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="closeReviewBtn">
+                    <i class="fas fa-times"></i>
+                    Close Review
+                </button>
+                <button class="btn-primary" id="continueExamBtn">
+                    <i class="fas fa-edit"></i>
+                    Continue Exam
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit Confirmation Modal -->
+    <div class="modal-overlay" id="submitModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Submit Examination</h2>
+                <button class="modal-close" id="submitModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="warning-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Are you sure you want to submit your exam?</h3>
+                </div>
+                <div class="submit-details">
+                    <p>Once you submit, you will not be able to make any changes to your answers.</p>
+                    <div class="submit-stats">
+                        <div class="submit-stat">
+                            <span class="stat-label">Questions Answered:</span>
+                            <span class="stat-value" id="submitAnswered">0</span>
+                        </div>
+                        <div class="submit-stat">
+                            <span class="stat-label">Questions Flagged:</span>
+                            <span class="stat-value" id="submitFlagged">0</span>
+                        </div>
+                        <div class="submit-stat">
+                            <span class="stat-label">Time Remaining:</span>
+                            <span class="stat-value" id="submitTime">02:00:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelSubmitBtn">
+                    <i class="fas fa-times"></i>
+                    Cancel
+                </button>
+                <button class="btn-primary" id="confirmSubmitBtn">
+                    <i class="fas fa-check"></i>
+                    Yes, Submit Exam
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exit Confirmation Modal -->
+    <div class="modal-overlay" id="exitModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Exit Examination</h2>
+                <button class="modal-close" id="exitModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="warning-message">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <h3>Are you sure you want to exit the exam?</h3>
+                </div>
+                <div class="exit-details">
+                    <p>Your progress will be saved, and you can resume later if time permits.</p>
+                    <div class="exit-stats">
+                        <div class="exit-stat">
+                            <span class="stat-label">Progress Saved:</span>
+                            <span class="stat-value" id="exitProgress">0%</span>
+                        </div>
+                        <div class="exit-stat">
+                            <span class="stat-label">Time Used:</span>
+                            <span class="stat-value" id="exitTimeUsed">00:00:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelExitBtn">
+                    <i class="fas fa-times"></i>
+                    Cancel
+                </button>
+                <button class="btn-primary" id="confirmExitBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Yes, Exit Exam
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/exam_frontend/js/main.js"></script>
+    <script src="/exam_frontend/secondary/js/exam.js"></script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Instructions - SmartExam Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/exam_frontend/css/style.css">
+    <link rel="stylesheet" href="/exam_frontend/secondary/css/exam-instruction.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+
+    <!-- Particle Effect -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="loader"></div>
+            <div class="loader-content">
+                <h3>SmartExams Portal</h3>
+                <p>Loading exam instructions...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div>
+                    <div class="brand-text">SmartExams</div>
+                </div>
+            </div>
+            
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb">
+            <div class="breadcrumb-container">
+                <a href="index.html" class="breadcrumb-link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="dashboard.html" class="breadcrumb-link">Dashboard</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="#" class="breadcrumb-link" id="moduleBreadcrumb">Module</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">Exam Instructions</span>
+            </div>
+        </nav>
+
+        <section class="instruction-section">
+            <div class="instruction-container">
+                <!-- Exam Header -->
+                <div class="exam-header">
+                    <div class="exam-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="exam-info">
+                        <h1 id="examTitle">Mathematics Final Examination</h1>
+                        <p class="exam-subtitle" id="examSubtitle">Secondary Education - Term 3 Assessment</p>
+                    </div>
+                    <div class="exam-status">
+                        <div class="status-badge" id="examStatus">Ready to Start</div>
+                    </div>
+                </div>
+
+                <!-- Progress Stats -->
+                <div class="progress-stats">
+                    <h2 class="section-title">Exam Progress</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Time Allocated</h3>
+                                <p class="stat-value" id="timeAllocated">2 Hours</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-history"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Time Remaining</h3>
+                                <p class="stat-value" id="timeRemaining">2 Hours</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Questions Attempted</h3>
+                                <p class="stat-value" id="questionsAttempted">0/50</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-list-ol"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Total Questions</h3>
+                                <p class="stat-value" id="totalQuestions">50</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exam Instructions -->
+                <div class="instructions-container">
+                    <h2 class="section-title">Exam Hall Instructions</h2>
+                    <div class="instructions-content">
+                        <div class="instruction-group">
+                            <h3 class="instruction-group-title">
+                                <i class="fas fa-laptop"></i>
+                                Technical Requirements
+                            </h3>
+                            <ul class="instruction-list">
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Ensure you have a stable internet connection throughout the exam
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Use a modern browser (Chrome, Firefox, Safari, or Edge)
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Disable pop-up blockers for this website
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Ensure your device is fully charged or plugged in
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Close all other applications and browser tabs
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="instruction-group">
+                            <h3 class="instruction-group-title">
+                                <i class="fas fa-user-shield"></i>
+                                Exam Conduct
+                            </h3>
+                            <ul class="instruction-list">
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    This exam must be completed in one sitting - you cannot pause and resume
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Do not refresh the page or use the browser's back button during the exam
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    All answers are automatically saved as you proceed
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    You can navigate between questions using the Next/Previous buttons
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    A timer will be displayed showing your remaining time
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="instruction-group">
+                            <h3 class="instruction-group-title">
+                                <i class="fas fa-ban"></i>
+                                Prohibited Actions
+                            </h3>
+                            <ul class="instruction-list">
+                                <li>
+                                    <i class="fas fa-times"></i>
+                                    Do not communicate with others during the exam
+                                </li>
+                                <li>
+                                    <i class="fas fa-times"></i>
+                                    Do not use any external resources unless explicitly permitted
+                                </li>
+                                <li>
+                                    <i class="fas fa-times"></i>
+                                    Do not take screenshots or record the exam content
+                                </li>
+                                <li>
+                                    <i class="fas fa-times"></i>
+                                    Do not open new browser tabs or windows during the exam
+                                </li>
+                                <li>
+                                    <i class="fas fa-times"></i>
+                                    Do not use mobile devices or secondary monitors
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="instruction-group">
+                            <h3 class="instruction-group-title">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Important Notes
+                            </h3>
+                            <ul class="instruction-list">
+                                <li>
+                                    <i class="fas fa-info-circle"></i>
+                                    The exam will automatically submit when time expires
+                                </li>
+                                <li>
+                                    <i class="fas fa-info-circle"></i>
+                                    You can flag questions for review and return to them later
+                                </li>
+                                <li>
+                                    <i class="fas fa-info-circle"></i>
+                                    Multiple choice questions may have one or more correct answers
+                                </li>
+                                <li>
+                                    <i class="fas fa-info-circle"></i>
+                                    Essay questions must be answered in the provided text boxes
+                                </li>
+                                <li>
+                                    <i class="fas fa-info-circle"></i>
+                                    Technical issues should be reported immediately to your instructor
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agreement Section -->
+                <div class="agreement-section">
+                    <div class="agreement-content">
+                        <div class="agreement-checkbox">
+                            <input type="checkbox" id="agreeCheckbox">
+                            <label for="agreeCheckbox">
+                                <i class="fas fa-shield-alt"></i>
+                                I have read and understood all the exam instructions and agree to abide by them
+                            </label>
+                        </div>
+                        <p class="agreement-note">
+                            <i class="fas fa-lock"></i>
+                            By checking this box, you acknowledge that any violation of these rules may result in exam disqualification
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Start Exam Button -->
+                <div class="start-exam-section">
+                    <button class="start-exam-btn" id="startExamBtn" disabled>
+                        <i class="fas fa-play-circle"></i>
+                        Start Examination
+                    </button>
+                    <p class="scroll-notice">
+                        <i class="fas fa-mouse-pointer"></i>
+                        Please read all instructions above before starting the exam
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                &copy; 2026 SmartExams. All rights reserved. | Secure Exam System v1.0
+            </div>
+        </div>
+    </footer>
+
+    <script src="/exam_frontend/js/main.js"></script>
+    <script src="/exam_frontend/secondary/js/exam-instruction.js"></script>
+</body>
+</html>

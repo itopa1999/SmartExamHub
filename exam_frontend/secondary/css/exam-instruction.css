@@ -1,0 +1,485 @@
+/* Exam Instruction Page Styles */
+
+.instruction-section {
+    padding: 2rem 0;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.instruction-container {
+    padding: 0 1rem;
+}
+
+/* Exam Header */
+.exam-header {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border: 1px solid rgba(110, 68, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.exam-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--gradient);
+}
+
+.exam-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    background: var(--gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.exam-info {
+    flex: 1;
+}
+
+.exam-info h1 {
+    font-weight: 700;
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.exam-subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.exam-status {
+    flex-shrink: 0;
+}
+
+.status-badge {
+    background: var(--gradient);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(110, 68, 255, 0.3);
+}
+
+/* Progress Stats */
+.progress-stats {
+    margin-bottom: 3rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(110, 68, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: var(--gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.stat-content h3 {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.stat-value {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin: 0;
+}
+
+/* Instructions Container */
+.instructions-container {
+    margin-bottom: 3rem;
+}
+
+.instructions-content {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(110, 68, 255, 0.1);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+/* Custom scrollbar for instructions */
+.instructions-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.instructions-content::-webkit-scrollbar-track {
+    background: rgba(110, 68, 255, 0.1);
+    border-radius: 4px;
+}
+
+.instructions-content::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+.instructions-content::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
+
+.instruction-group {
+    margin-bottom: 2.5rem;
+}
+
+.instruction-group:last-child {
+    margin-bottom: 0;
+}
+
+.instruction-group-title {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(110, 68, 255, 0.1);
+}
+
+.instruction-group-title i {
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+.instruction-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.instruction-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(110, 68, 255, 0.05);
+}
+
+.instruction-list li:last-child {
+    border-bottom: none;
+}
+
+.instruction-list li i {
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+}
+
+.instruction-list li i.fa-check {
+    color: var(--success-color);
+}
+
+.instruction-list li i.fa-times {
+    color: var(--accent);
+}
+
+.instruction-list li i.fa-info-circle {
+    color: var(--secondary);
+}
+
+/* Agreement Section */
+.agreement-section {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    border: 2px solid rgba(110, 68, 255, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+.agreement-section:has(#agreeCheckbox:checked) {
+    border-color: var(--success-color);
+    background: rgba(40, 167, 69, 0.05);
+}
+
+.agreement-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.agreement-checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 0.2rem;
+    accent-color: var(--success-color);
+}
+
+.agreement-checkbox label {
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.agreement-checkbox label i {
+    color: var(--success-color);
+}
+
+.agreement-note {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding-left: 2.8rem;
+}
+
+.agreement-note i {
+    color: var(--accent);
+}
+
+/* Start Exam Section */
+.start-exam-section {
+    text-align: center;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(110, 68, 255, 0.1);
+    position: sticky;
+    bottom: 2rem;
+    z-index: 100;
+}
+
+.start-exam-btn {
+    background: var(--gradient);
+    border: none;
+    color: white;
+    padding: 1.2rem 3rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 5px 20px rgba(110, 68, 255, 0.3);
+    margin-bottom: 1rem;
+}
+
+.start-exam-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(110, 68, 255, 0.4);
+}
+
+.start-exam-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.start-exam-btn:disabled {
+    background: var(--text-muted);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+.scroll-notice {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Section Titles */
+.section-title {
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--gradient);
+    border-radius: 2px;
+}
+
+/* Animation for content */
+.instruction-group, .stat-card, .agreement-section {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.instruction-group:nth-child(1) { animation-delay: 0.1s; }
+.instruction-group:nth-child(2) { animation-delay: 0.2s; }
+.instruction-group:nth-child(3) { animation-delay: 0.3s; }
+.instruction-group:nth-child(4) { animation-delay: 0.4s; }
+
+.stat-card:nth-child(1) { animation-delay: 0.1s; }
+.stat-card:nth-child(2) { animation-delay: 0.2s; }
+.stat-card:nth-child(3) { animation-delay: 0.3s; }
+.stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .instruction-section {
+        padding: 1rem 0;
+    }
+    
+    .exam-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+        gap: 1.5rem;
+    }
+    
+    .exam-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 2rem;
+    }
+    
+    .exam-info h1 {
+        font-size: 1.8rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-card {
+        padding: 1.5rem;
+    }
+    
+    .instructions-content {
+        padding: 2rem;
+        max-height: 50vh;
+    }
+    
+    .instruction-group-title {
+        font-size: 1.2rem;
+    }
+    
+    .agreement-section {
+        padding: 1.5rem;
+    }
+    
+    .agreement-checkbox label {
+        font-size: 0.9rem;
+    }
+    
+    .agreement-note {
+        padding-left: 0;
+        justify-content: flex-start;
+    }
+    
+    .start-exam-btn {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .exam-header {
+        padding: 1.5rem;
+    }
+    
+    .exam-info h1 {
+        font-size: 1.5rem;
+    }
+    
+    .instructions-content {
+        padding: 1.5rem;
+        max-height: 45vh;
+    }
+    
+    .instruction-list li {
+        padding: 0.8rem 0;
+        font-size: 0.9rem;
+    }
+    
+    .agreement-checkbox {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .agreement-checkbox input[type="checkbox"] {
+        margin-top: 0;
+    }
+}

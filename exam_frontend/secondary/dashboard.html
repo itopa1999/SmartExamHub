@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - SmartExam Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/exam_frontend/css/style.css">
+    <link rel="stylesheet" href="/exam_frontend/secondary/css/dashboard.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+
+    <!-- Particle Effect -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="loader"></div>
+            <div class="loader-content">
+                <h3>SmartExams Portal</h3>
+                <p>Loading your dashboard...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div>
+                    <div class="brand-text">SmartExams</div>
+                </div>
+            </div>
+            
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb">
+            <div class="breadcrumb-container">
+                <a href="index.html" class="breadcrumb-link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="auth.html" class="breadcrumb-link">Authentication</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">Student Dashboard</span>
+            </div>
+        </nav>
+
+        <section class="dashboard-section">
+            <!-- Welcome Section -->
+            <div class="welcome-banner">
+                <div class="welcome-content">
+                    <h1 class="welcome-title">Welcome back, <span id="studentName">Student</span>!</h1>
+                    <p class="welcome-subtitle">Ready to continue your learning journey?</p>
+                </div>
+                <div class="student-info">
+                    <div class="info-item">
+                        <span class="info-label">Student ID:</span>
+                        <span class="info-value" id="studentIdDisplay">S12345</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Current Level:</span>
+                        <span class="info-value" id="studentLevel">Secondary 2</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h2 class="section-title">Quick Actions</h2>
+                <div class="actions-grid">
+                    <a href="scores.html" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3>View Scores</h3>
+                        <p>Check your exam results and performance analytics</p>
+                    </a>
+                    
+                    <a href="profile.html" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <h3>Profile Settings</h3>
+                        <p>Update your personal information and preferences</p>
+                    </a>
+                    
+                    <a href="resources.html" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>Study Resources</h3>
+                        <p>Access learning materials and practice exercises</p>
+                    </a>
+                    
+                    <a href="schedule.html" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Exam Schedule</h3>
+                        <p>View upcoming tests and examination dates</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Modules Section -->
+            <div class="modules-section">
+                <h2 class="section-title">Your Subjects</h2>
+                <div class="modules-grid" id="modulesGrid">
+                    <!-- Modules will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                &copy; 2026 SmartExams. All rights reserved. | Advanced Assessment System v1.0
+            </div>
+        </div>
+    </footer>
+
+    <!-- Student Info Confirmation Modal -->
+    <div class="modal-overlay" id="infoModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Confirm Your Information</h2>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="student-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Full Name:</span>
+                        <span class="detail-value" id="modalStudentName">John Doe</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Student ID:</span>
+                        <span class="detail-value" id="modalStudentId">S12345</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Education Level:</span>
+                        <span class="detail-value" id="modalStudentLevel">Secondary 2</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Institution:</span>
+                        <span class="detail-value" id="modalInstitution">SmartExams Academy</span>
+                    </div>
+                </div>
+                <p class="modal-message">
+                    Please verify that your information is correct. If any details are incorrect, 
+                    please contact your institution's administration.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+                <button class="btn-primary" id="confirmBtn">
+                    <i class="fas fa-check"></i> Yes, This is Me
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Module Details Modal -->
+    <div class="modal-overlay" id="moduleModal" style="display: none;">
+        <div class="modal modal-large">
+            <div class="modal-header">
+                <h2 id="moduleModalTitle">Module Details</h2>
+                <button class="modal-close" id="moduleModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="module-overview">
+                    <div class="module-basic-info">
+                        <div class="module-icon-large">
+                            <i class="fas fa-calculator" id="moduleModalIcon"></i>
+                        </div>
+                        <div class="module-text-info">
+                            <h3 id="moduleModalName">Mathematics</h3>
+                            <p class="module-description" id="moduleModalDescription">
+                                Algebra, Geometry, Calculus and advanced mathematical concepts
+                            </p>
+                            <div class="module-stats-overview">
+                                <div class="stat-overview">
+                                    <span class="stat-value" id="moduleModalProgress">75%</span>
+                                    <span class="stat-label">Overall Progress</span>
+                                </div>
+                                <div class="stat-overview">
+                                    <span class="stat-value" id="moduleModalAssignments">12</span>
+                                    <span class="stat-label">Assignments</span>
+                                </div>
+                                <div class="stat-overview">
+                                    <span class="stat-value" id="moduleModalTopics">8</span>
+                                    <span class="stat-label">Topics</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="topics-section">
+                    <h3 class="topics-title">Course Topics</h3>
+                    <div class="topics-list" id="topicsList">
+                        <!-- Topics will be populated dynamically -->
+                    </div>
+                </div>
+                
+                <div class="resources-section">
+                    <h3 class="resources-title">Learning Resources</h3>
+                    <div class="resources-list" id="resourcesList">
+                        <!-- Resources will be populated dynamically -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="closeModuleModal">
+                    <i class="fas fa-times"></i> Close
+                </button>
+                <button class="btn-primary" id="startModuleFromModal">
+                    <i class="fas fa-play"></i> Start This Module
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/exam_frontend/js/main.js"></script>
+    <script src="/exam_frontend/secondary/js/dashboard.js"></script>
+</body>
+</html>

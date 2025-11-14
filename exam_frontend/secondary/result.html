@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Results - SmartExam Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/exam_frontend/css/style.css">
+    <link rel="stylesheet" href="/exam_frontend/secondary/css/result.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+
+    <!-- Particle Effect -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="loader"></div>
+            <div class="loader-content">
+                <h3>SmartExams Portal</h3>
+                <p>Generating your results...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div>
+                    <div class="brand-text">SmartExams</div>
+                </div>
+            </div>
+            
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb">
+            <div class="breadcrumb-container">
+                <a href="index.html" class="breadcrumb-link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="dashboard.html" class="breadcrumb-link">Dashboard</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">Exam Results</span>
+            </div>
+        </nav>
+
+        <section class="result-section">
+            <div class="result-container">
+                <!-- Result Header -->
+                <div class="result-header">
+                    <div class="result-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="result-title">
+                        <h1>Exam Results</h1>
+                        <p class="result-subtitle" id="examName">Mathematics Final Examination</p>
+                    </div>
+                    <div class="result-badge" id="resultBadge">
+                        <span>Completed</span>
+                    </div>
+                </div>
+
+                <!-- Overall Score -->
+                <div class="score-overview">
+                    <div class="score-card">
+                        <div class="score-circle">
+                            <div class="score-progress" id="scoreProgress">
+                                <span class="score-percent" id="scorePercent">85%</span>
+                            </div>
+                        </div>
+                        <div class="score-details">
+                            <h2>Overall Score</h2>
+                            <div class="score-breakdown">
+                                <div class="score-item">
+                                    <span class="score-label">Correct Answers:</span>
+                                    <span class="score-value" id="correctAnswers">42</span>
+                                </div>
+                                <div class="score-item">
+                                    <span class="score-label">Total Questions:</span>
+                                    <span class="score-value" id="totalQuestions">50</span>
+                                </div>
+                                <div class="score-item">
+                                    <span class="score-label">Time Taken:</span>
+                                    <span class="score-value" id="timeTaken">01:45:23</span>
+                                </div>
+                                <div class="score-item">
+                                    <span class="score-label">Submission Date:</span>
+                                    <span class="score-value" id="submissionDate">2024-01-15 14:30</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="performance-section">
+                    <h2 class="section-title">Performance Metrics</h2>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon accuracy">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <div class="metric-content">
+                                <h3>Accuracy</h3>
+                                <div class="metric-value" id="accuracyMetric">84%</div>
+                                <div class="metric-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill accuracy" style="width: 84%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon speed">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="metric-content">
+                                <h3>Speed</h3>
+                                <div class="metric-value" id="speedMetric">2.1 min/q</div>
+                                <div class="metric-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill speed" style="width: 70%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon completion">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="metric-content">
+                                <h3>Completion</h3>
+                                <div class="metric-value" id="completionMetric">100%</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill completion" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon rank">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="metric-content">
+                                <h3>Percentile</h3>
+                                <div class="metric-value" id="percentileMetric">92%</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill rank" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Topic-wise Breakdown -->
+                <div class="breakdown-section">
+                    <h2 class="section-title">Topic-wise Performance</h2>
+                    <div class="breakdown-content">
+                        <div class="breakdown-chart">
+                            <div class="chart-container">
+                                <canvas id="topicChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="breakdown-list">
+                            <div class="topic-item" id="topicList">
+                                <!-- Topics will be populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question Review -->
+                <div class="review-section">
+                    <h2 class="section-title">Question Review</h2>
+                    <div class="review-actions">
+                        <button class="btn-review" id="viewAllQuestions">
+                            <i class="fas fa-list"></i>
+                            View All Questions
+                        </button>
+                        <button class="btn-review" id="viewIncorrect">
+                            <i class="fas fa-times-circle"></i>
+                            Review Incorrect Answers
+                        </button>
+                        <button class="btn-review" id="viewFlagged">
+                            <i class="fas fa-flag"></i>
+                            Review Flagged Questions
+                        </button>
+                    </div>
+
+                    <div class="questions-summary">
+                        <div class="summary-card correct">
+                            <div class="summary-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h3>Correct Answers</h3>
+                                <div class="summary-count" id="correctCount">42</div>
+                                <p>Well done! You answered these questions correctly.</p>
+                            </div>
+                        </div>
+
+                        <div class="summary-card incorrect">
+                            <div class="summary-icon">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h3>Incorrect Answers</h3>
+                                <div class="summary-count" id="incorrectCount">8</div>
+                                <p>Review these questions to improve your understanding.</p>
+                            </div>
+                        </div>
+
+                        <div class="summary-card skipped">
+                            <div class="summary-icon">
+                                <i class="fas fa-forward"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h3>Skipped Questions</h3>
+                                <div class="summary-count" id="skippedCount">0</div>
+                                <p>You answered all questions. Great time management!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions Section -->
+                <div class="actions-section">
+                    <div class="action-buttons">
+                        <button class="btn-action primary" id="retakeExam">
+                            <i class="fas fa-redo"></i>
+                            Retake This Exam
+                        </button>
+                        <button class="btn-action secondary" id="downloadResults">
+                            <i class="fas fa-download"></i>
+                            Download Results
+                        </button>
+                        <button class="btn-action secondary" id="backToDashboard">
+                            <i class="fas fa-tachometer-alt"></i>
+                            Back to Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                &copy; 2026 SmartExams. All rights reserved. | Advanced Assessment System v1.0
+            </div>
+        </div>
+    </footer>
+
+    <!-- Question Review Modal -->
+    <div class="modal-overlay" id="questionModal">
+        <div class="modal modal-large">
+            <div class="modal-header">
+                <h2>Question Review</h2>
+                <button class="modal-close" id="questionModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="question-review" id="questionReviewContent">
+                    <!-- Question review content will be populated here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="closeQuestionModal">
+                    <i class="fas fa-times"></i>
+                    Close
+                </button>
+                <button class="btn-primary" id="nextQuestion">
+                    <i class="fas fa-arrow-right"></i>
+                    Next Question
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/exam_frontend/js/main.js"></script>
+    <script src="/exam_frontend/secondary/js/result.js"></script>
+</body>
+</html>

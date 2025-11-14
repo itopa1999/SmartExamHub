@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secondary Exam Authentication - SmartExam Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/exam_frontend/css/style.css">
+    <link rel="stylesheet" href="/exam_frontend/secondary/css/auth.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+
+    <!-- Particle Effect -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="loader"></div>
+            <div class="loader-content">
+                <h3>SmartExams Portal</h3>
+                <p>Loading authentication system...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div>
+                    <div class="brand-text">SmartExams</div>
+                </div>
+            </div>
+            
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb">
+            <div class="breadcrumb-container">
+                <a href="/exam_frontend/index.html" class="breadcrumb-link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="#" class="breadcrumb-link">Secondary Education</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">Authentication</span>
+            </div>
+        </nav>
+
+        <section class="auth-section">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <i class="fas fa-graduation-cap auth-icon"></i>
+                        <h1 class="auth-title">Secondary Exam Authentication</h1>
+                        <p class="auth-subtitle">Please enter your Student ID to access the secondary education examination portal</p>
+                    </div>
+
+                    <form class="auth-form" id="authForm">
+                        <div class="form-group">
+                            <label for="studentId" class="form-label">Student ID</label>
+                            <div class="input-container">
+                                <i class="fas fa-user input-icon"></i>
+                                <input type="text" id="studentId" class="form-input" placeholder="Enter your Student ID" required>
+                            </div>
+                            <p class="form-hint">Your Student ID should be provided by your educational institution</p>
+                        </div>
+
+                        <button type="submit" class="auth-button">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span>Access Exam Portal</span>
+                        </button>
+                    </form>
+
+                    <div class="auth-footer">
+                        <p class="auth-help">
+                            <i class="fas fa-question-circle"></i>
+                            Having trouble? Contact your institution's exam coordinator
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                &copy; 2026 SmartExams. All rights reserved. | Advanced Assessment System v1.0
+            </div>
+        </div>
+    </footer>
+
+    <script src="/exam_frontend/js/main.js"></script>
+    <script src="/exam_frontend/secondary/js/auth.js"></script>
+</body>
+</html>
