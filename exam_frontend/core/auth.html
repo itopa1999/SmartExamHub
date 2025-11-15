@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Exam Portal</title>
+    <title>Admin Login - SmartExam Portal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-
-    </style>
+    <link rel="stylesheet" href="/exam_frontend/css/style.css">
+    <link rel="stylesheet" href="/exam_frontend/core/css/admin-login.css">
 </head>
 <body>
     <!-- Animated Background -->
@@ -25,8 +24,8 @@
         <div class="preloader-content">
             <div class="loader"></div>
             <div class="loader-content">
-                <h3>Nexus Exam Portal</h3>
-                <p>Initializing advanced assessment system...</p>
+                <h3>SmartExams Admin</h3>
+                <p>Loading administrative system...</p>
             </div>
         </div>
     </div>
@@ -36,11 +35,10 @@
         <div class="header-container">
             <div class="logo-container">
                 <div class="logo">
-                    <i class="fas fa-brain"></i>
+                    <i class="fas fa-shield-alt"></i>
                 </div>
                 <div>
-                    <div class="brand-text">Nexus Exams</div>
-                    <div class="brand-tagline">Next Generation Assessment Platform</div>
+                    <div class="brand-text">SmartExams Admin</div>
                 </div>
             </div>
             
@@ -52,65 +50,95 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <section class="welcome-section">
-            <h1 class="welcome-title">Welcome to Nexus Exams</h1>
-            <p class="welcome-subtitle">
-                Experience the future of digital assessment with our cutting-edge examination platform. 
-                Select your assessment type below to begin your journey. Our adaptive testing technology 
-                ensures a personalized experience that challenges and empowers every learner.
-            </p>
-        </section>
-
-        <section class="cards-container">
-            <!-- Secondary Education Card -->
-            <div class="exam-card card-secondary" id="secondaryCard">
-                <i class="fas fa-graduation-cap card-icon"></i>
-                <h2 class="card-title">Secondary Education</h2>
-                <p class="card-description">
-                    Comprehensive assessments designed for high school students, covering core curriculum 
-                    subjects with adaptive difficulty scaling. These exams evaluate conceptual understanding 
-                    and application skills across Mathematics, Sciences, Languages, and Social Studies. 
-                    Perfect for standardized testing preparation and academic progress tracking.
-                </p>
-                <div class="card-footer">
-                    <button class="btn-card" onclick="selectExam('secondary')">
-                        <i class="fas fa-play-circle"></i> Start Secondary Exam
-                    </button>
-                </div>
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb">
+            <div class="breadcrumb-container">
+                <a href="index.html" class="breadcrumb-link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">Admin Portal</span>
             </div>
+        </nav>
 
-            <!-- Tertiary Education Card -->
-            <div class="exam-card card-tertiary" id="tertiaryCard">
-                <i class="fas fa-university card-icon"></i>
-                <h2 class="card-title">Tertiary Education</h2>
-                <p class="card-description">
-                    Advanced evaluation systems for college and university level students, featuring 
-                    specialized testing modules across diverse academic disciplines. These assessments 
-                    incorporate critical thinking, analytical reasoning, and subject-matter expertise 
-                    evaluation with professional certification pathways and detailed performance analytics.
-                </p>
-                <div class="card-footer">
-                    <button class="btn-card" onclick="selectExam('tertiary')">
-                        <i class="fas fa-play-circle"></i> Start Tertiary Exam
-                    </button>
-                </div>
-            </div>
+        <section class="admin-auth-section">
+            <div class="admin-auth-container">
+                <div class="admin-auth-card">
+                    <!-- Security Badge -->
+                    <div class="security-badge">
+                        <i class="fas fa-shield-check"></i>
+                        <span>Secure Admin Portal</span>
+                    </div>
 
-            <!-- Quiz Card -->
-            <div class="exam-card card-quiz" id="quizCard">
-                <i class="fas fa-puzzle-piece card-icon"></i>
-                <h2 class="card-title">Quick Quiz</h2>
-                <p class="card-description">
-                    Interactive knowledge evaluation sessions perfect for skill reinforcement, 
-                    concept practice, and competitive learning environments. Featuring instant 
-                    feedback, progress tracking, and gamified elements to enhance engagement. 
-                    Ideal for self-assessment, classroom activities, or casual knowledge challenges 
-                    with customizable difficulty and topic selection.
-                </p>
-                <div class="card-footer">
-                    <button class="btn-card" onclick="selectExam('quiz')">
-                        <i class="fas fa-play-circle"></i> Start Quick Quiz
-                    </button>
+                    <div class="admin-auth-header">
+                        <i class="fas fa-user-shield admin-auth-icon"></i>
+                        <h1 class="admin-auth-title">Administrator Access</h1>
+                        <p class="admin-auth-subtitle">Enter your credentials to access the examination management system</p>
+                    </div>
+
+                    <form class="admin-auth-form" id="adminAuthForm">
+                        <div class="form-group">
+                            <label for="username" class="form-label">
+                                <i class="fas fa-user-cog"></i>
+                                Username
+                            </label>
+                            <div class="input-container">
+                                <i class="fas fa-user input-icon"></i>
+                                <input type="text" id="username" class="form-input" placeholder="Enter admin username" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="form-label">
+                                <i class="fas fa-key"></i>
+                                Password
+                            </label>
+                            <div class="input-container">
+                                <i class="fas fa-lock input-icon"></i>
+                                <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+                                <button type="button" class="password-toggle" id="passwordToggle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Security Options -->
+                        <div class="security-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="rememberMe">
+                                <span class="checkmark"></span>
+                                Remember this device
+                            </label>
+                            
+                            <a href="#" class="forgot-password" id="forgotPassword">
+                                <i class="fas fa-question-circle"></i>
+                                Forgot Password?
+                            </a>
+                        </div>
+
+                        <button type="submit" class="admin-auth-button">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span>Access Admin Panel</span>
+                            <div class="button-loader" id="buttonLoader">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                        </button>
+                    </form>
+
+                    <div class="admin-auth-footer">
+                        <div class="security-notice">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>This portal is restricted to authorized personnel only. Unauthorized access attempts will be logged and monitored.</p>
+                        </div>
+                        
+                        <div class="admin-links">
+                            
+                            <a href="index.html" class="admin-link">
+                                <i class="fas fa-home"></i>
+                                Return to Main Site
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -120,35 +148,52 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-text">
-                &copy; 2023 Nexus Exams. All rights reserved. | Advanced Assessment System v3.0
-            </div>
-            <div class="social-links">
-                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                &copy; 2026 SmartExams. All rights reserved. | Admin System v2.0
             </div>
         </div>
     </footer>
 
-    <script>
-        // Preloader functionality
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
-            
-            // Add a small delay to ensure everything is loaded
-            setTimeout(function() {
-                preloader.style.opacity = '0';
-                preloader.style.visibility = 'hidden';
-            }, 1000);
-        });
+    <!-- Forgot Password Modal -->
+    <div class="modal-overlay" id="forgotModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Admin Password Recovery</h2>
+                <button class="modal-close" id="forgotModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="recovery-info">
+                    <i class="fas fa-envelope recovery-icon"></i>
+                    <h3>Contact System Administrator</h3>
+                    <p>For security reasons, admin password recovery requires manual verification. Please contact your system administrator or IT support team.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>IT Support: +1 (555) 123-ADMIN</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>admin-support@smartexams.edu</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="closeForgotModal">
+                    <i class="fas fa-times"></i>
+                    Close
+                </button>
+                <button class="btn-primary" id="contactSupportBtn">
+                    <i class="fas fa-headset"></i>
+                    Contact Support
+                </button>
+            </div>
+        </div>
+    </div>
 
-        // Theme toggle functionality
-
-        // Exam selection functionality
-
-        // Create particle effect
-
-        // Initialize particles when page loads
-    </script>
+    <script src="/exam_frontend/js/main.js"></script>
+    <script src="/exam_frontend/core/js/admin-login.js"></script>
 </body>
 </html>

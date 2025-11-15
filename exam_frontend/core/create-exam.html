@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Exam - SmartExam Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/exam_frontend/css/style.css">
+    <link rel="stylesheet" href="/exam_frontend/core/css/create-exam.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+
+    <!-- Particle Effect -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="loader"></div>
+            <div class="loader-content">
+                <h3>SmartExams Admin</h3>
+                <p>Loading exam creation system...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div>
+                    <div class="brand-text">SmartExams Admin</div>
+                </div>
+            </div>
+            
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb">
+            <div class="breadcrumb-container">
+                <a href="index.html" class="breadcrumb-link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="admin-dashboard.html" class="breadcrumb-link">
+                    Admin Dashboard
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">Create Exam</span>
+            </div>
+        </nav>
+
+        <!-- Create Exam Container -->
+        <div class="create-exam-container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>Create New Exam</h1>
+                <p>Upload an Excel or CSV file to create exam questions in bulk</p>
+            </div>
+
+            <!-- Upload Section -->
+            <div class="upload-section" id="uploadSection">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <div class="upload-text">
+                        <h3>Upload Exam File</h3>
+                        <p>Drag & drop your Excel or CSV file here or click to browse</p>
+                        
+                        <div class="file-types">
+                            <span class="file-type-badge">
+                                <i class="fas fa-file-excel"></i> Excel (.xlsx, .xls)
+                            </span>
+                            <span class="file-type-badge">
+                                <i class="fas fa-file-csv"></i> CSV (.csv)
+                            </span>
+                        </div>
+                        
+                        <button class="browse-btn" id="browseBtn">
+                            <i class="fas fa-folder-open"></i> Browse Files
+                        </button>
+                        <input type="file" id="fileInput" accept=".xlsx,.xls,.csv">
+                    </div>
+                </div>
+
+                <!-- File Info -->
+                <div class="file-info" id="fileInfo">
+                    <div class="file-info-header">
+                        <i class="fas fa-file-alt file-info-icon"></i>
+                        <h4>File Details</h4>
+                    </div>
+                    <div class="file-details">
+                        <div class="file-detail">
+                            <span class="file-detail-label">File Name</span>
+                            <span class="file-detail-value" id="fileName">-</span>
+                        </div>
+                        <div class="file-detail">
+                            <span class="file-detail-label">File Size</span>
+                            <span class="file-detail-value" id="fileSize">-</span>
+                        </div>
+                        <div class="file-detail">
+                            <span class="file-detail-label">File Type</span>
+                            <span class="file-detail-value" id="fileType">-</span>
+                        </div>
+                        <div class="file-detail">
+                            <span class="file-detail-label">Last Modified</span>
+                            <span class="file-detail-value" id="fileModified">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Processing file...</div>
+            </div>
+
+            <!-- Messages -->
+            <div class="message message-success" id="successMessage">
+                <i class="fas fa-check-circle message-icon"></i>
+                <div>
+                    <strong>Success!</strong> <span id="successText">Exam questions have been created successfully.</span>
+                </div>
+            </div>
+
+            <div class="message message-error" id="errorMessage">
+                <i class="fas fa-exclamation-triangle message-icon"></i>
+                <div>
+                    <strong>Error!</strong> <span id="errorText">There was a problem processing your file.</span>
+                </div>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="preview-section" id="previewSection">
+                <h2 class="section-title">Preview Questions</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                    Please review the questions below before final submission. 
+                    <strong>Total Questions: <span id="questionCount">0</span></strong>
+                </p>
+                
+                <div class="preview-table-container">
+                    <table class="preview-table" id="previewTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Question</th>
+                                <th>Options</th>
+                                <th>Correct Answer</th>
+                                <th>Difficulty</th>
+                                <th>Category</th>
+                            </tr>
+                        </thead>
+                        <tbody id="previewTableBody">
+                            <!-- Questions will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" id="cancelBtn">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                    <button class="btn btn-primary" id="submitBtn">
+                        <i class="fas fa-check"></i> Confirm & Create Exam
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                &copy; 2024 SmartExams Portal. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    <script src="/exam_frontend/js/main.js"></script>
+    <script src="/exam_frontend/core/js/create-exam.js"></script>
+    <script>
+       
+    </script>
+</body>
+</html>

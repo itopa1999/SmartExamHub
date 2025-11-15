@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SmartExam Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/exam_frontend/css/style.css">
+    <link rel="stylesheet" href="/exam_frontend/core/css/dashboard.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+
+    <!-- Particle Effect -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="loader"></div>
+            <div class="loader-content">
+                <h3>SmartExams Admin</h3>
+                <p>Loading administrative system...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div>
+                    <div class="brand-text">SmartExams Admin</div>
+                </div>
+            </div>
+            
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb">
+            <div class="breadcrumb-container">
+                <a href="index.html" class="breadcrumb-link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">Admin Dashboard</span>
+            </div>
+        </nav>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <h1>Admin Dashboard</h1>
+                <p>Welcome to the SmartExams Administrative Portal</p>
+            </div>
+
+            <!-- Overview Cards -->
+            <div class="overview-cards">
+                <!-- Total Students Card -->
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-value">2,847</div>
+                    <div class="stat-label">Total Students</div>
+                    <div class="stat-trend trend-up">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>12% increase</span>
+                    </div>
+                </div>
+
+                <!-- Active Exams Card -->
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-value">15</div>
+                    <div class="stat-label">Active Exams</div>
+                    <div class="stat-trend trend-up">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>3 new today</span>
+                    </div>
+                </div>
+
+                <!-- Pending Results Card -->
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-value">128</div>
+                    <div class="stat-label">Pending Results</div>
+                    <div class="stat-trend trend-down">
+                        <i class="fas fa-arrow-down"></i>
+                        <span>8 processed</span>
+                    </div>
+                </div>
+
+                <!-- Login System Card -->
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </div>
+                    <div class="stat-value">Online</div>
+                    <div class="stat-label">Login System</div>
+                    <div class="stat-trend">
+                        <i class="fas fa-check-circle" style="color: #00c9a7;"></i>
+                        <span>All systems operational</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h2 class="section-title">Quick Actions</h2>
+                <div class="actions-grid">
+                    <!-- Create New Exam -->
+                    <a href="create-exam.html" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <h3 class="action-title">Create New Exam</h3>
+                        <p class="action-description">Set up a new examination with custom parameters and questions</p>
+                    </a>
+
+                    <!-- Manage Students -->
+                    <a href="manage-students.html" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <h3 class="action-title">Manage Students</h3>
+                        <p class="action-description">View, edit, and manage student accounts and enrollments</p>
+                    </a>
+
+                    <!-- Generate Reports -->
+                    <a href="#" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3 class="action-title">Generate Reports</h3>
+                        <p class="action-description">Create detailed performance and analytics reports</p>
+                    </a>
+
+                    <!-- System Settings -->
+                    <a href="#" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="action-title">System Settings</h3>
+                        <p class="action-description">Configure system preferences and security settings</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                &copy; 2025 SmartExams Portal. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    <script src="/exam_frontend/js/main.js"></script>
+    <script src="/exam_frontend/core/js/dashboard.js"></script>
+</body>
+</html>
