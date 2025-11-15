@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Quiz - SmartExam Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/exam_frontend/css/style.css">
+    <link rel="stylesheet" href="/exam_frontend/quiz/css/index.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+
+    <!-- Particle Effect -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="loader"></div>
+            <div class="loader-content">
+                <h3>SmartExams Portal</h3>
+                <p>Loading practice quizzes...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <div class="brand-text">SmartExams Practice</div>
+                </div>
+            </div>
+            
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb">
+            <div class="breadcrumb-container">
+                <a href="../index.html" class="breadcrumb-link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">Practice Quiz</span>
+            </div>
+        </nav>
+
+        <!-- Quiz Container -->
+        <div class="quiz-container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>Practice Quiz Center</h1>
+                <p>Test your knowledge, improve your skills, and prepare for success with our interactive practice quizzes</p>
+            </div>
+
+            <!-- Welcome Banner -->
+            <div class="welcome-banner" id="welcomeBanner" style="display: none;">
+                <h2>Welcome to Practice Mode, <span class="user-name" id="displayUserName">Student</span>!</h2>
+                <p>Ready to challenge yourself? Choose a subject below to begin your practice session.</p>
+                <button class="edit-name-btn" id="editNameBtn" title="Edit your name">
+                    <i class="fas fa-edit"></i>
+                </button>
+            </div>
+
+            <!-- Practice Info Section -->
+            <div class="practice-info">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="info-title">For Practice</h3>
+                        <p class="info-description">Use these quizzes to test your knowledge, identify weak areas, and improve your understanding of various subjects.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="info-title">Track Progress</h3>
+                        <p class="info-description">Monitor your improvement over time with detailed performance analytics and personalized feedback.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3 class="info-title">Flexible Timing</h3>
+                        <p class="info-description">Practice at your own pace with no time limits. Perfect for thorough learning and concept mastery.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3 class="info-title">Build Confidence</h3>
+                        <p class="info-description">Gain confidence through repeated practice and detailed explanations for each question.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modules Grid -->
+            <div class="modules-grid" id="modulesGrid">
+                <!-- Modules will be populated here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Name Modal -->
+    <div class="modal-overlay active" id="nameModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Welcome to Practice Quiz!</h2>
+            </div>
+            <div class="modal-body">
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                    Please enter your name to personalize your practice experience. This will be saved for future visits.
+                </p>
+                <div class="form-group">
+                    <label for="userName" class="form-label">Your Name</label>
+                    <input type="text" class="form-control" id="userName" placeholder="Enter your full name" required>
+                    <div class="form-text">This name will be used to welcome you and track your progress</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="saveNameBtn">
+                    <i class="fas fa-check"></i> Start Practicing
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                &copy; 2024 SmartExams Portal. Practice makes perfect!
+            </div>
+        </div>
+    </footer>
+
+    <script src="/exam_frontend/js/main.js"></script>
+    <script src="/exam_frontend/quiz/js/index.js"></script>
+    <script>
+        
+        // Your existing initialization code for preloader, theme toggle, particles
+        // ... (include your existing JS code here)
+    </script>
+</body>
+</html>

@@ -23,7 +23,11 @@ function selectExam(type) {
             console.error("Invalid exam type");
             return;
         }        
-        window.location.href = `${type}/auth.html?examType=${type}`;
+        if (type === 'quiz') {
+            window.location.href = `quiz/index.html?examType=${type}`;
+        } else {
+            window.location.href = `${type}/auth.html?examType=${type}`;
+        }
     }, 500);
 }
 document.addEventListener('DOMContentLoaded', function() {

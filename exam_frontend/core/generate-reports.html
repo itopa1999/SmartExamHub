@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Generation - SmartExam Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/exam_frontend/css/style.css">
+    <link rel="stylesheet" href="/exam_frontend/core/css/genrate-reports.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+
+    <!-- Particle Effect -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="loader"></div>
+            <div class="loader-content">
+                <h3>SmartExams Admin</h3>
+                <p>Loading report generation system...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div>
+                    <div class="brand-text">SmartExams Admin</div>
+                </div>
+            </div>
+            
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb">
+            <div class="breadcrumb-container">
+                <a href="index.html" class="breadcrumb-link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="admin-dashboard.html" class="breadcrumb-link">
+                    Admin Dashboard
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">Report Generation</span>
+            </div>
+        </nav>
+
+        <!-- Reports Container -->
+        <div class="reports-container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>Report Generation</h1>
+                <p>Generate and view detailed reports for all examination modules</p>
+            </div>
+
+            <!-- Messages -->
+            <div class="message message-success" id="successMessage">
+                <i class="fas fa-check-circle message-icon"></i>
+                <div>
+                    <strong>Success!</strong> <span id="successText">Report downloaded successfully.</span>
+                </div>
+            </div>
+
+            <div class="message message-error" id="errorMessage">
+                <i class="fas fa-exclamation-triangle message-icon"></i>
+                <div>
+                    <strong>Error!</strong> <span id="errorText">There was a problem generating the report.</span>
+                </div>
+            </div>
+
+            <!-- Modules Grid -->
+            <div class="modules-grid" id="modulesGrid">
+                <!-- Modules will be populated here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Results Modal -->
+    <div class="modal-overlay" id="resultsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle">Exam Results</h2>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Statistics Section -->
+                <div class="stats-section">
+                    <h3 class="section-title" id="statsTitle">Performance Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="averageGrade">-</div>
+                            <div class="stat-label">Average Grade</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="highestGrade">-</div>
+                            <div class="stat-label">Highest Grade</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="lowestGrade">-</div>
+                            <div class="stat-label">Lowest Grade</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="passRate">-</div>
+                            <div class="stat-label">Pass Rate</div>
+                        </div>
+                    </div>
+
+                    <!-- Grade Distribution -->
+                    <div class="grade-distribution">
+                        <h4 style="margin-bottom: 1rem; color: var(--text);">Grade Distribution</h4>
+                        <div id="gradeDistribution">
+                            <!-- Grade bars will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Table -->
+                <div class="results-section">
+                    <h3 class="section-title">Student Results</h3>
+                    <div class="table-responsive">
+                        <table class="results-table" id="resultsTable">
+                            <thead>
+                                <tr>
+                                    <th>Student ID</th>
+                                    <th>Full Name</th>
+                                    <th>Class/Level</th>
+                                    <th>Score</th>
+                                    <th>Grade</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultsTableBody">
+                                <!-- Results will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div class="empty-state" id="emptyResultsState" style="display: none;">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>No Results Available</h3>
+                        <p>No student results found for this module.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <div class="pagination-info" id="paginationInfo">
+                    Showing 0 of 0 students
+                </div>
+                <div class="pagination-controls">
+                    <button class="page-btn" id="firstPageBtn" disabled>
+                        <i class="fas fa-angle-double-left"></i>
+                    </button>
+                    <button class="page-btn" id="prevPageBtn" disabled>
+                        <i class="fas fa-angle-left"></i>
+                    </button>
+                    <div id="pageNumbers">
+                        <!-- Page numbers will be generated here -->
+                    </div>
+                    <button class="page-btn" id="nextPageBtn" disabled>
+                        <i class="fas fa-angle-right"></i>
+                    </button>
+                    <button class="page-btn" id="lastPageBtn" disabled>
+                        <i class="fas fa-angle-double-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                &copy; 2024 SmartExams Portal. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    <script src="/exam_frontend/js/main.js"></script>
+    <script src="/exam_frontend/core/js/generate-reports.js"></script>
+
+    <script>
+       
+    </script>
+</body>
+</html>

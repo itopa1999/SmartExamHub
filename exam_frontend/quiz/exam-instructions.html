@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Instructions - SmartExam Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/exam_frontend/css/style.css">
+    <link rel="stylesheet" href="/exam_frontend/quiz/css/exam-instruction.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+
+    <!-- Particle Effect -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="loader"></div>
+            <div class="loader-content">
+                <h3>SmartExams Portal</h3>
+                <p>Loading practice instructions...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div>
+                    <div class="brand-text">SmartExams Practice</div>
+                </div>
+            </div>
+            
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb">
+            <div class="breadcrumb-container">
+                <a href="../index.html" class="breadcrumb-link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="index.html" class="breadcrumb-link">Practice Quiz</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="#" class="breadcrumb-link" id="moduleBreadcrumb">Module</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">Practice Instructions</span>
+            </div>
+        </nav>
+
+        <section class="instruction-section">
+            <div class="instruction-container">
+                <!-- Exam Header -->
+                <div class="exam-header">
+                    <div class="exam-icon">
+                        <i class="fas fa-file-alt" id="moduleIcon"></i>
+                    </div>
+                    <div class="exam-info">
+                        <h1 id="examTitle">Practice Quiz</h1>
+                        <p class="exam-subtitle" id="examSubtitle">Practice Mode - Self-Paced Learning</p>
+                    </div>
+                    <div class="exam-status">
+                        <div class="status-badge" id="examStatus">
+                            Practice Mode <span class="practice-badge">No Pressure</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Practice Note -->
+                <div class="practice-note">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Welcome to Practice Mode!</h3>
+                    <p>This is a self-paced practice session designed to help you learn and improve. Take your time, review answers, and focus on understanding the concepts.</p>
+                </div>
+
+                <!-- Progress Stats -->
+                <div class="progress-stats">
+                    <h2 class="section-title">Practice Session Details</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Estimated Duration</h3>
+                                <p class="stat-value" id="timeAllocated">Self-Paced</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-list-ol"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Total Questions</h3>
+                                <p class="stat-value" id="totalQuestions">25 Questions</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-redo"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Review Mode</h3>
+                                <p class="stat-value" id="reviewMode">Available</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Progress Tracking</h3>
+                                <p class="stat-value" id="progressTracking">Enabled</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Practice Instructions -->
+                <div class="instructions-container">
+                    <h2 class="section-title">Practice Session Guidelines</h2>
+                    <div class="instructions-content">
+                        <div class="instruction-group">
+                            <h3 class="instruction-group-title">
+                                <i class="fas fa-laptop"></i>
+                                Practice Environment
+                            </h3>
+                            <ul class="instruction-list">
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    This is a practice session - take your time and focus on learning
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    No time limits - practice at your own comfortable pace
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Use any resources you need for learning and understanding
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Feel free to take breaks and return when ready
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Multiple attempts are encouraged for better learning
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="instruction-group">
+                            <h3 class="instruction-group-title">
+                                <i class="fas fa-graduation-cap"></i>
+                                Learning Features
+                            </h3>
+                            <ul class="instruction-list">
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Immediate feedback on your answers
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Detailed explanations for each question
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Ability to review and change answers
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Progress tracking and performance analytics
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Bookmark questions for later review
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="instruction-group">
+                            <h3 class="instruction-group-title">
+                                <i class="fas fa-lightbulb"></i>
+                                Learning Tips
+                            </h3>
+                            <ul class="instruction-list">
+                                <li>
+                                    <i class="fas fa-info-circle"></i>
+                                    Read explanations carefully to understand concepts
+                                </li>
+                                <li>
+                                    <i class="fas fa-info-circle"></i>
+                                    Take notes on topics you find challenging
+                                </li>
+                                <li>
+                                    <i class="fas fa-info-circle"></i>
+                                    Use the review feature to strengthen weak areas
+                                </li>
+                                <li>
+                                    <i class="fas fa-info-circle"></i>
+                                    Practice regularly for better retention
+                                </li>
+                                <li>
+                                    <i class="fas fa-info-circle"></i>
+                                    Don't rush - focus on understanding, not just answering
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="instruction-group">
+                            <h3 class="instruction-group-title">
+                                <i class="fas fa-trophy"></i>
+                                Benefits of Practice
+                            </h3>
+                            <ul class="instruction-list">
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Build confidence in your knowledge
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Identify and improve weak areas
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Develop better time management skills
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Reduce exam anxiety through preparation
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    Track your improvement over time
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agreement Section -->
+                <div class="agreement-section">
+                    <div class="agreement-content">
+                        <div class="agreement-checkbox">
+                            <input type="checkbox" id="agreeCheckbox">
+                            <label for="agreeCheckbox">
+                                <i class="fas fa-shield-alt"></i>
+                                I understand this is a practice session and I'm ready to begin learning
+                            </label>
+                        </div>
+                        <p class="agreement-note">
+                            <i class="fas fa-lock"></i>
+                            Your progress will be saved automatically for future practice sessions
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Start Practice Button -->
+                <div class="start-exam-section">
+                    <button class="start-exam-btn" id="startPracticeBtn" disabled>
+                        <i class="fas fa-play-circle"></i>
+                        Start Practice Session
+                    </button>
+                    <p class="scroll-notice">
+                        <i class="fas fa-mouse-pointer"></i>
+                        Please review the practice guidelines before starting
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                &copy; 2024 SmartExams Portal. Practice makes perfect!
+            </div>
+        </div>
+    </footer>
+    <script src="/exam_frontend/js/main.js"></script>
+    <script src="/exam_frontend/quiz/js/exam-instruction.js"></script>
+    <script>
+        
+        // Your existing initialization code for preloader, theme toggle, particles
+        // ... (include your existing JS code here)
+    </script>
+</body>
+</html>

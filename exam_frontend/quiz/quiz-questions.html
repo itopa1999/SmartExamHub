@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Quiz - SmartExam Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/exam_frontend/css/style.css">
+    <link rel="stylesheet" href="/exam_frontend/quiz/css/quiz-questions.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+
+    <!-- Particle Effect -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="loader"></div>
+            <div class="loader-content">
+                <h3>SmartExams Portal</h3>
+                <p>Loading practice questions...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Practice Header -->
+    <header class="practice-header">
+        <div class="practice-header-container">
+            <div class="practice-brand">
+                <div class="practice-logo">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="practice-title">
+                    <h1 id="currentPracticeTitle">Practice Session</h1>
+                    <p class="practice-subtitle" id="currentPracticeSubtitle">Learning Mode</p>
+                </div>
+            </div>
+            
+            <div class="practice-controls">
+                <div class="practice-mode-badge">
+                    <i class="fas fa-graduation-cap"></i> Practice Mode
+                </div>
+                
+                <div class="timer-container">
+                    <div class="timer">
+                        <i class="fas fa-clock"></i>
+                        <span id="timerDisplay">00:00:00</span>
+                    </div>
+                </div>
+                
+                <button class="btn-exit" id="exitPracticeBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    End Practice
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Practice Content -->
+    <main class="practice-main">
+        <!-- Left Sidebar - Question Navigation -->
+        <aside class="practice-sidebar">
+            <div class="sidebar-section">
+                <h3>Question Navigation</h3>
+                <div class="question-grid" id="questionNavGrid">
+                    <!-- Questions will be populated dynamically -->
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3>Practice Progress</h3>
+                <div class="progress-stats">
+                    <div class="progress-item">
+                        <span class="progress-label">Answered</span>
+                        <span class="progress-value" id="answeredCount">0</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-label">Flagged</span>
+                        <span class="progress-value" id="flaggedCount">0</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-label">Reviewed</span>
+                        <span class="progress-value" id="reviewedCount">0</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-label">Remaining</span>
+                        <span class="progress-value" id="remainingCount">25</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3>Legend</h3>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <div class="legend-color current"></div>
+                        <span>Current</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color answered"></div>
+                        <span>Answered</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color flagged"></div>
+                        <span>Flagged</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color reviewed"></div>
+                        <span>Reviewed</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color unattempted"></div>
+                        <span>Unattempted</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Practice Area -->
+        <section class="practice-content">
+            <!-- Question Header -->
+            <div class="question-header">
+                <div class="question-meta">
+                    <span class="question-number" id="currentQuestionNumber">Question 1</span>
+                    <span class="question-points" id="questionPoints">Practice Question</span>
+                </div>
+                <div class="question-actions">
+                    <button class="btn-flag" id="flagQuestionBtn">
+                        <i class="far fa-flag"></i>
+                        <span>Flag for Review</span>
+                    </button>
+                    <button class="btn-hint" id="hintBtn">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Get Hint</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question Content -->
+            <div class="question-content">
+                <div class="question-text" id="questionText">
+                    <!-- Question text will be loaded here -->
+                </div>
+                
+                <!-- Multiple Choice Options -->
+                <div class="answer-options" id="answerOptions">
+                    <!-- Answer options will be loaded here -->
+                </div>
+
+                <!-- Feedback Section -->
+                <div class="feedback-section" id="feedbackSection">
+                    <div class="feedback-header">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Learning Feedback</span>
+                    </div>
+                    <div class="feedback-content" id="feedbackContent">
+                        <!-- Feedback will be shown here -->
+                    </div>
+                    <div class="explanation" id="explanationSection">
+                        <!-- Explanation will be shown here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="question-navigation">
+                <button class="btn-nav btn-prev" id="prevQuestionBtn" disabled>
+                    <i class="fas fa-arrow-left"></i>
+                    Previous Question
+                </button>
+                
+                <div class="nav-info">
+                    <span id="navInfo">Question 1 of 25</span>
+                </div>
+                
+                <button class="btn-nav btn-next" id="nextQuestionBtn">
+                    Next Question
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Practice Footer -->
+    <footer class="practice-footer">
+        <div class="practice-footer-container">
+            <div class="footer-info">
+                <span id="studentInfo">Practice Mode - Take your time to learn</span>
+            </div>
+            
+            <div class="footer-actions">
+                <button class="btn-secondary" id="reviewBtn">
+                    <i class="fas fa-list"></i>
+                    Review Progress
+                </button>
+                <button class="btn-primary" id="checkAnswerBtn">
+                    <i class="fas fa-check-circle"></i>
+                    Check Answer
+                </button>
+                <button class="btn-primary" id="finishPracticeBtn">
+                    <i class="fas fa-flag-checkered"></i>
+                    Finish Practice
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Hint Modal -->
+    <div class="modal-overlay" id="hintModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Learning Hint</h2>
+                <button class="modal-close" id="hintModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="hint-content">
+                    <div class="hint-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="hint-text" id="hintText">
+                        <!-- Hint content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" id="closeHintBtn">
+                    <i class="fas fa-check"></i>
+                    Got it, thanks!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div class="modal-overlay" id="resultsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Practice Session Complete!</h2>
+                <button class="modal-close" id="resultsModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="results-summary">
+                    <div class="score-circle" id="finalScore">
+                        0%
+                    </div>
+                    <h3>Great job completing the practice!</h3>
+                    <p>Here's how you did:</p>
+                </div>
+                
+                <div class="results-stats">
+                    <div class="result-stat">
+                        <div class="result-value" id="correctAnswers">0</div>
+                        <div class="result-label">Correct Answers</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-value" id="totalQuestions">25</div>
+                        <div class="result-label">Total Questions</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-value" id="timeSpent">00:00</div>
+                        <div class="result-label">Time Spent</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-value" id="completionRate">0%</div>
+                        <div class="result-label">Completion</div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        <i class="fas fa-graduation-cap"></i>
+                        Keep practicing to improve your skills!
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="reviewAnswersBtn">
+                    <i class="fas fa-redo"></i>
+                    Review Answers
+                </button>
+                <button class="btn-primary" id="newPracticeBtn">
+                    <i class="fas fa-play-circle"></i>
+                    New Practice Session
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exit Confirmation Modal -->
+    <div class="modal-overlay" id="exitModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>End Practice Session</h2>
+                <button class="modal-close" id="exitModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <i class="fas fa-sign-out-alt" style="font-size: 3rem; color: #dc3545; margin-bottom: 1rem;"></i>
+                    <h3 style="color: var(--text); margin-bottom: 0.5rem;">Are you sure you want to end practice?</h3>
+                    <p style="color: var(--text-muted);">Your progress will be saved and you can review your results.</p>
+                </div>
+                <div class="progress-stats" style="background: rgba(220, 53, 69, 0.05); padding: 1rem; border-radius: 8px;">
+                    <div class="progress-item">
+                        <span class="progress-label">Questions Answered</span>
+                        <span class="progress-value" id="exitAnswered">0</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-label">Time Spent</span>
+                        <span class="progress-value" id="exitTime">00:00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelExitBtn">
+                    <i class="fas fa-times"></i>
+                    Continue Practice
+                </button>
+                <button class="btn-primary" id="confirmExitBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    End Practice
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="/exam_frontend/js/main.js"></script>
+    <script src="/exam_frontend/quiz/js/quiz-questions.js"></script>
+    <script>
+       
+
+        // Your existing initialization code for preloader, theme toggle, particles
+        // ... (include your existing JS code here)
+    </script>
+</body>
+</html>
