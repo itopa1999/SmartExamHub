@@ -19,9 +19,12 @@ function selectExam(type) {
             case 'quiz':
                 examName = 'Quick Quiz';
                 break;
+            case 'core':
+                examName = 'Admin Portal';
+                break;
             default:
-            console.error("Invalid exam type");
-            return;
+                console.error("Invalid exam type");
+                return;
         }        
         if (type === 'quiz') {
             window.location.href = `quiz/index.html?examType=${type}`;

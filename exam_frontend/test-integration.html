@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend-Backend Integration Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #6e44ff; }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border-left: 4px solid #6e44ff;
+            background: #f9f9f9;
+        }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .info { color: #17a2b8; }
+        button {
+            background: #6e44ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #5533cc; }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .loading { display: none; }
+        .loading.active { display: block; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 SmartExam - Frontend-Backend Integration Test</h1>
+        
+        <div class="test-section">
+            <h3>Test Configuration</h3>
+            <p><strong>Backend URL:</strong> <span id="backendUrl">http://127.0.0.1:8000/core/api/admin</span></p>
+            <p><strong>Admin Credentials:</strong> admin / admin123</p>
+        </div>
+
+        <div class="test-section">
+            <h3>Step 1: Test Authentication</h3>
+            <button onclick="testLogin()">Test Login API</button>
+            <div id="loginResult" class="loading"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>Step 2: Test Levels API</h3>
+            <button onclick="testLevels()">Test GET /levels/</button>
+            <div id="levelsResult" class="loading"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>Step 3: Test Create Exam API</h3>
+            <button onclick="testCreateExam()">Test POST /exams/create/</button>
+            <div id="createResult" class="loading"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>Step 4: Full Integration Test</h3>
+            <button onclick="runFullTest()">Run All Tests</button>
+            <div id="fullTestResult" class="loading"></div>
+        </div>
+    </div>
+
+    <script src="/exam_frontend/js/main.js"></script>
+    <script>
+        let accessToken = null;
+
+        async function testLogin() {
+            const resultDiv = document.getElementById('loginResult');
+            resultDiv.className = 'loading active';
+            resultDiv.innerHTML = '<p class="info">Testing login...</p>';
+
+            try {
+                const response = await fetch(`${CORE_URL}/login/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: 'admin',
+                        password: 'admin123'
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    accessToken = result.data.access_token;
+                    CookieManager.set('access_token', accessToken);
+                    resultDiv.innerHTML = `
+                        <p class="success">✅ Login Successful!</p>
+                        <pre>${JSON.stringify(result, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <p class="error">❌ Login Failed</p>
+                        <pre>${JSON.stringify(result, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <p class="error">❌ Network Error: ${error.message}</p>
+                `;
+            }
+        }
+
+        async function testLevels() {
+            const resultDiv = document.getElementById('levelsResult');
+            resultDiv.className = 'loading active';
+            resultDiv.innerHTML = '<p class="info">Testing levels API...</p>';
+
+            if (!accessToken) {
+                accessToken = CookieManager.get('access_token');
+            }
+
+            if (!accessToken) {
+                resultDiv.innerHTML = '<p class="error">❌ Please login first!</p>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${CORE_URL}/levels/`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    resultDiv.innerHTML = `
+                        <p class="success">✅ Levels API Working!</p>
+                        <p><strong>Found ${result.data.length} levels:</strong></p>
+                        <pre>${JSON.stringify(result.data.slice(0, 3), null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <p class="error">❌ Levels API Failed</p>
+                        <pre>${JSON.stringify(result, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <p class="error">❌ Network Error: ${error.message}</p>
+                `;
+            }
+        }
+
+        async function testCreateExam() {
+            const resultDiv = document.getElementById('createResult');
+            resultDiv.className = 'loading active';
+            resultDiv.innerHTML = '<p class="info">Testing create exam API...</p>';
+
+            if (!accessToken) {
+                accessToken = CookieManager.get('access_token');
+            }
+
+            if (!accessToken) {
+                resultDiv.innerHTML = '<p class="error">❌ Please login first!</p>';
+                return;
+            }
+
+            try {
+                // First, get a level
+                const levelsResponse = await fetch(`${CORE_URL}/levels/`, {
+                    headers: { 'Authorization': `Bearer ${accessToken}` }
+                });
+                const levelsResult = await levelsResponse.json();
+                
+                if (!levelsResult.success || levelsResult.data.length === 0) {
+                    resultDiv.innerHTML = '<p class="error">❌ No levels available!</p>';
+                    return;
+                }
+
+                const firstLevel = levelsResult.data[0];
+
+                // Create test CSV data
+                const csvContent = `question_text,option_a,option_b,option_c,option_d,correct_answer,difficulty,category,marks
+"What is 2 + 2?","2","3","4","5","C","easy","Mathematics","1"
+"What is the capital of France?","London","Paris","Berlin","Rome","B","medium","Geography","2"`;
+                
+                const blob = new Blob([csvContent], { type: 'text/csv' });
+                const file = new File([blob], 'test_questions.csv', { type: 'text/csv' });
+
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('title', 'Frontend Test Exam');
+                formData.append('code', `FE_TEST_${Date.now()}`);
+                formData.append('level_id', firstLevel.id);
+                formData.append('description', 'Automated frontend test');
+                formData.append('duration_minutes', '60');
+                formData.append('passing_score', '60');
+                formData.append('max_attempts', '1');
+                formData.append('randomize_questions', 'true');
+                formData.append('show_correct_answers', 'true');
+                formData.append('is_active', 'false');
+
+                const response = await fetch(`${CORE_URL}/exams/create/`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    },
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    resultDiv.innerHTML = `
+                        <p class="success">✅ Create Exam API Working!</p>
+                        <p><strong>Created exam with ${result.data.exam_module.total_questions} questions</strong></p>
+                        <pre>${JSON.stringify(result.data.exam_module, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <p class="error">❌ Create Exam Failed</p>
+                        <pre>${JSON.stringify(result, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <p class="error">❌ Error: ${error.message}</p>
+                    <pre>${error.stack}</pre>
+                `;
+            }
+        }
+
+        async function runFullTest() {
+            const resultDiv = document.getElementById('fullTestResult');
+            resultDiv.className = 'loading active';
+            resultDiv.innerHTML = '<p class="info">Running full integration test...</p>';
+
+            let results = [];
+
+            // Test 1: Login
+            results.push('<h4>Test 1: Authentication</h4>');
+            try {
+                await testLogin();
+                await new Promise(resolve => setTimeout(resolve, 500));
+                results.push('<p class="success">✅ Login test passed</p>');
+            } catch (e) {
+                results.push(`<p class="error">❌ Login test failed: ${e.message}</p>`);
+            }
+
+            // Test 2: Levels
+            results.push('<h4>Test 2: Levels API</h4>');
+            try {
+                await testLevels();
+                await new Promise(resolve => setTimeout(resolve, 500));
+                results.push('<p class="success">✅ Levels test passed</p>');
+            } catch (e) {
+                results.push(`<p class="error">❌ Levels test failed: ${e.message}</p>`);
+            }
+
+            // Test 3: Create Exam
+            results.push('<h4>Test 3: Create Exam API</h4>');
+            try {
+                await testCreateExam();
+                await new Promise(resolve => setTimeout(resolve, 500));
+                results.push('<p class="success">✅ Create exam test passed</p>');
+            } catch (e) {
+                results.push(`<p class="error">❌ Create exam test failed: ${e.message}</p>`);
+            }
+
+            results.push('<hr><h3 class="success">🎉 All Tests Completed!</h3>');
+            resultDiv.innerHTML = results.join('');
+        }
+
+        // Auto-test on load if requested
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('autotest') === 'true') {
+            window.addEventListener('load', () => {
+                setTimeout(runFullTest, 1000);
+            });
+        }
+    </script>
+</body>
+</html>

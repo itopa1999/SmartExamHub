@@ -26,6 +26,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('', RedirectView.as_view(url='/backdoor/', permanent=False)),
+    path('core/api/', include('apps.core.urls')),
     path('backdoor/', admin.site.urls),
     path("health/", include("health_check.urls")),
     path(
